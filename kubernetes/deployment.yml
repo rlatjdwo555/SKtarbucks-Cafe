@@ -1,22 +1,22 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: CafeManage
+  name: cafemanage
   labels:
-    app: CafeManage
+    app: cafemanage
 spec:
   replicas: 1
   selector:
     matchLabels:
-      app: CafeManage
+      app: cafemanage
   template:
     metadata:
       labels:
-        app: CafeManage
+        app: cafemanage
     spec:
       containers:
-        - name: CafeManage
-          image: username/CafeManage:latest
+        - name: cafemanage
+          image: username/cafemanage:latest
           ports:
             - containerPort: 8080
           readinessProbe:
