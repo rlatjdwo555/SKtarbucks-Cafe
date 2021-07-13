@@ -2,7 +2,7 @@ version: 0.2
 
 env:
   variables:
-    _PROJECT_NAME: "cafe" 
+    _PROJECT_NAME: "cafemanage" 
     _ECR_NAME: "user04"
     _NAMESPACE: "skcc04-ns"
     _AWS_REGION: "ap-northeast-1" 
@@ -75,7 +75,7 @@ phases:
             spec:
               containers:
                 - name: $_PROJECT_NAME
-                  image: $AWS_ACCOUNT_ID.dkr.ecr.$_AWS_REGION.amazonaws.com/$_ECR_NAME-$_PROJECT_NAME:$CODEBUILD_RESOLVED_SOURCE_VERSION
+                  image: $AWS_ACCOUNT_ID.dkr.ecr.$_AWS_REGION.amazonaws.com/$_ECR_NAME-$_PROJECT_NAME:latest
                   ports:
                     - containerPort: 8080
                   resources:
