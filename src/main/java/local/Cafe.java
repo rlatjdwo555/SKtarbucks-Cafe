@@ -12,9 +12,9 @@ public class Cafe {
     @GeneratedValue(strategy=GenerationType.AUTO)
     private Long id;
     private String cafeNm;
-    private Long pCnt;
-    private String chkDate;
-
+    private Long stock;
+    private int price;
+    
     @PostPersist
     public void onPostPersist(){
         CafeRegistered cafeRegistered = new CafeRegistered();
@@ -22,21 +22,8 @@ public class Cafe {
         cafeRegistered.publishAfterCommit();
     }
 
-    @PreUpdate
-    public  void onPreUpdate(){
-        /*
-        강제적 Delay
-        try {
-            Thread.currentThread().sleep((long)10000);
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
-        */
-    }
-
     @PostUpdate
     public void onPostUpdate(){
-
         CafeChanged cafeChanged = new CafeChanged();
         BeanUtils.copyProperties(this, cafeChanged);
         cafeChanged.publishAfterCommit();
@@ -51,7 +38,6 @@ public class Cafe {
 
     }
 
-
     public Long getId() {
         return id;
     }
@@ -59,6 +45,7 @@ public class Cafe {
     public void setId(Long id) {
         this.id = id;
     }
+
     public String getCafeNm() {
         return cafeNm;
     }
@@ -66,22 +53,21 @@ public class Cafe {
     public void setCafeNm(String cafeNm) {
         this.cafeNm = cafeNm;
     }
-    public Long getPCnt() {
-        return pCnt;
+
+    public void setStock(Long stock){
+        this.stock = stock;
     }
 
-    public void setPCnt(Long pCnt) {
-        this.pCnt = pCnt;
-    }
-    public String getChkDate() {
-        return chkDate;
+    public Long getStock(){
+        return stock;
     }
 
-    public void setChkDate(String chkDate) {
-        this.chkDate = chkDate;
+    public void setPrice(int price){
+        this.price = price;
     }
 
-
-
+    public int getPrice(){
+        return price;
+    }
 
 }

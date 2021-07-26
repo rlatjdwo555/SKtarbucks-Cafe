@@ -31,7 +31,22 @@ public class PolicyHandler{
 
             if(temp.isPresent()){
                 Cafe a = temp.get();
-                a.setPCnt(a.getPCnt()+1);
+                a.setStock(a.getStock()+canceled.getCount());
+                cafeRepository.save(a);
+            }
+        }
+    }
+
+    @StreamListener(KafkaProcessor.INPUT)
+    public void wheneverRequested_OrderRequested(@Payload Requested requested){
+
+        if(requested.isMe()){
+            System.out.println("##### 주문 요청으로 인한 수량 변화 : " + requested.toJson());
+            Optional<Cafe> temp = cafeRepository.findById(requested.getCafeId());
+
+            if(temp.isPresent()){
+                Cafe a = temp.get();
+                a.setStock(a.getStock()-requested.getCount());
                 cafeRepository.save(a);
             }
         }

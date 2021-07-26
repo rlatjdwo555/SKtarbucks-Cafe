@@ -4,12 +4,8 @@ public class CafeRegistered extends AbstractEvent {
 
     private Long id;
     private String cafeNm;
-    private String chkDate;
-    private Long pCnt;
-
-    public CafeRegistered(){
-        super();
-    }
+    private Long stock;
+    private int price;
 
     public Long getId() {
         return id;
@@ -25,19 +21,20 @@ public class CafeRegistered extends AbstractEvent {
     public void setCafeNm(String cafeNm) {
         this.cafeNm = cafeNm;
     }
-    public String getChkDate() {
-        return chkDate;
+
+    public void setStock(Long stock){
+        this.stock = stock;
     }
 
-    public void setChkDate(String chkDate) {
-        this.chkDate = chkDate;
+    public Long getStock(){
+        return stock;
     }
 
-    public Long getpCnt() {
-        return pCnt;
+    public void setPrice(int price){
+        this.price = price;
     }
 
-    public void setpCnt(Long pCnt) {
-        this.pCnt = pCnt;
+    public int getPrice(){
+        return price;
     }
 }
