@@ -52,4 +52,19 @@ public class PolicyHandler{
         }
     }
 
+    @StreamListener(KafkaProcessor.INPUT)
+    public void wheneverPaymentCancelled_OrderCanceled(@Payload PaymentCancelled paymentCancelled){
+
+        if(paymentCancelled.isMe()){
+            System.out.println("##### 결제 취소로 인한 수량 변화 : " + paymentCancelled.toJson());
+            Optional<Cafe> temp = cafeRepository.findById(paymentCancelled.getCafeId());
+
+            if(temp.isPresent()){
+                Cafe a = temp.get();
+                a.setStock(a.getStock()+paymentCancelled.getCount());
+                cafeRepository.save(a);
+            }
+        }
+    }
+
 }
